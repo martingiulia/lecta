@@ -20,7 +20,7 @@ class BookDetailPage extends StatefulWidget {
   const BookDetailPage({super.key, required this.bookId});
 
   @override
-  _BookDetailPageState createState() => _BookDetailPageState();
+  State<BookDetailPage> createState() => _BookDetailPageState();
 }
 
 class _BookDetailPageState extends State<BookDetailPage> {

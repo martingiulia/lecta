@@ -134,7 +134,7 @@ class _RatingBottomSheetState extends State<RatingBottomSheet> {
                         fontSize: 32,
                         color: index < _starRating
                             ? Colors.amber
-                            : Colors.grey.withOpacity(0.3),
+                            : Colors.grey.withValues(alpha: 0.3),
                       ),
                     ),
                   ),
@@ -228,10 +228,13 @@ class _RatingBottomSheetState extends State<RatingBottomSheet> {
               onPressed: _saving || _starRating == 0
                   ? null
                   : () async {
+                      final navigator = Navigator.of(context);
+                      final messenger = ScaffoldMessenger.of(context);
                       setState(() {
                         _saving = true;
                       });
                       await Future.delayed(const Duration(milliseconds: 300));
+                      if (!mounted) return;
 
                       // Validazione pagina
                       int? page;
@@ -264,11 +267,12 @@ class _RatingBottomSheetState extends State<RatingBottomSheet> {
                           widget.book.id,
                           page,
                         );
+                        if (!mounted) return;
                       }
 
                       setState(() => _saving = false);
-                      Navigator.of(context).pop();
-                      ScaffoldMessenger.of(context).showSnackBar(
+                      navigator.pop();
+                      messenger.showSnackBar(
                         const SnackBar(content: Text('Valutazione salvata!')),
                       );
                     },
@@ -330,7 +334,7 @@ class _RatingBottomSheetState extends State<RatingBottomSheet> {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8),
                       color: _selectedEmoji == _ratingEmojis[index]
-                          ? Colors.blue.withOpacity(0.2)
+                          ? Colors.blue.withValues(alpha: 0.2)
                           : Colors.transparent,
                       border: _selectedEmoji == _ratingEmojis[index]
                           ? Border.all(color: Colors.blue, width: 2)

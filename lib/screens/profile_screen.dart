@@ -12,9 +12,14 @@ import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 import '../core/theme.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
 
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -79,7 +84,6 @@ class ProfileScreen extends StatelessWidget {
                     onTap: () => _showLibraryOptionsDialog(context),
                   ),
                   const Divider(height: 32),
-
                   _buildProfileOption(context, Icons.logout, 'Logout'),
                 ],
               ),
@@ -107,9 +111,11 @@ class ProfileScreen extends StatelessWidget {
         onTap:
             onTap ??
             () {
-              ScaffoldMessenger.of(
-                context,
-              ).showSnackBar(SnackBar(content: Text('$title selezionato')));
+              if (mounted) {
+                ScaffoldMessenger.of(
+                  context,
+                ).showSnackBar(SnackBar(content: Text('$title selezionato')));
+              }
             },
       ),
     );
@@ -118,6 +124,10 @@ class ProfileScreen extends StatelessWidget {
   void _showThemeBottomSheet(BuildContext context) async {
     final themeProvider = Provider.of<ThemeProvider>(context, listen: false);
     final prefs = await SharedPreferences.getInstance();
+    if (!context.mounted) return;
+
+    final currentTheme = themeProvider.themeMode;
+
     showModalBottomSheet(
       context: context,
       shape: const RoundedRectangleBorder(
@@ -125,7 +135,7 @@ class ProfileScreen extends StatelessWidget {
       ),
       // ignore: deprecated_member_use
       backgroundColor: Theme.of(context).dialogBackgroundColor,
-      builder: (BuildContext context) {
+      builder: (BuildContext modalContext) {
         return Padding(
           padding: const EdgeInsets.all(24),
           child: Column(
@@ -134,41 +144,50 @@ class ProfileScreen extends StatelessWidget {
             children: [
               Text(
                 'Scegli il tuo mood',
-                style: Theme.of(context).textTheme.titleMedium,
+                style: Theme.of(modalContext).textTheme.titleMedium,
               ),
               const SizedBox(height: 20),
               _buildThemeOption(
-                context,
+                modalContext,
                 Icons.light_mode,
                 'Tema Chiaro',
                 'Sempre luminoso e chiaro',
                 () async {
                   themeProvider.setThemeMode(ThemeMode.light);
                   await prefs.setString('themeMode', 'light');
-                  Navigator.pop(context);
+                  if (modalContext.mounted) {
+                    Navigator.pop(modalContext);
+                  }
                 },
+                isSelected: currentTheme == ThemeMode.light,
               ),
               _buildThemeOption(
-                context,
+                modalContext,
                 Icons.dark_mode,
                 'Tema Scuro',
                 'Sempre scuro per i tuoi occhi',
                 () async {
                   themeProvider.setThemeMode(ThemeMode.dark);
                   await prefs.setString('themeMode', 'dark');
-                  Navigator.pop(context);
+                  if (modalContext.mounted) {
+                    Navigator.pop(modalContext);
+                  }
                 },
+                isSelected: currentTheme == ThemeMode.dark,
               ),
               _buildThemeOption(
-                context,
+                modalContext,
                 Icons.brightness_auto,
                 'Tema Dinamico',
                 'Chiaro di giorno, scuro di sera',
                 () async {
                   themeProvider.setThemeMode(ThemeMode.system);
                   await prefs.setString('themeMode', 'system');
-                  Navigator.pop(context);
+                  if (modalContext.mounted) {
+                    Navigator.pop(modalContext);
+                  }
                 },
+                isSelected: currentTheme == ThemeMode.system,
               ),
               const SizedBox(height: 20),
             ],
@@ -183,8 +202,9 @@ class ProfileScreen extends StatelessWidget {
     IconData icon,
     String title,
     String subtitle,
-    VoidCallback onTap,
-  ) {
+    VoidCallback onTap, {
+    bool isSelected = false,
+  }) {
     return InkWell(
       onTap: onTap,
       borderRadius: BorderRadius.circular(12),
@@ -194,7 +214,7 @@ class ProfileScreen extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
           border: Border.all(
-            color: Theme.of(context).colorScheme.outline.withOpacity(0.2),
+            color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.2),
           ),
         ),
         child: Row(
@@ -225,6 +245,8 @@ class ProfileScreen extends StatelessWidget {
                 ],
               ),
             ),
+            if (isSelected)
+              const Icon(Icons.check_circle, color: Colors.green, size: 24),
           ],
         ),
       ),
@@ -233,6 +255,8 @@ class ProfileScreen extends StatelessWidget {
 
   void _showReadingRemindersDialog(BuildContext context) async {
     final prefs = await SharedPreferences.getInstance();
+    if (!context.mounted) return;
+
     bool enabled = prefs.getBool('readingReminderEnabled') ?? false;
     String time = prefs.getString('readingReminderTime') ?? '20:00';
     String frequency =
@@ -241,18 +265,19 @@ class ProfileScreen extends StatelessWidget {
       hour: int.parse(time.split(':')[0]),
       minute: int.parse(time.split(':')[1]),
     );
+
     showDialog(
       context: context,
-      builder: (BuildContext context) {
+      builder: (BuildContext dialogContext) {
         return StatefulBuilder(
-          builder: (context, setState) {
+          builder: (builderContext, setState) {
             return AlertDialog(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
               ),
               title: Text(
                 'Promemoria di Lettura',
-                style: Theme.of(context).textTheme.titleMedium,
+                style: Theme.of(builderContext).textTheme.titleMedium,
               ),
               content: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -279,13 +304,13 @@ class ProfileScreen extends StatelessWidget {
                     trailing: const Icon(Icons.arrow_forward_ios, size: 16),
                     onTap: () async {
                       final picked = await showTimePicker(
-                        context: context,
+                        context: builderContext,
                         initialTime: selectedTime,
                       );
-                      if (picked != null) {
+                      if (picked != null && builderContext.mounted) {
                         setState(() {
                           selectedTime = picked;
-                          time = picked.format(context);
+                          time = picked.format(builderContext);
                         });
                         await prefs.setString(
                           'readingReminderTime',
@@ -305,14 +330,15 @@ class ProfileScreen extends StatelessWidget {
                     onTap: () async {
                       final options = ['Giornaliera', 'Settimanale'];
                       final selected = await showDialog<String>(
-                        context: context,
-                        builder: (context) => SimpleDialog(
+                        context: builderContext,
+                        builder: (innerContext) => SimpleDialog(
                           title: const Text('Frequenza'),
                           children: options
                               .map(
                                 (e) => SimpleDialogOption(
                                   child: Text(e),
-                                  onPressed: () => Navigator.pop(context, e),
+                                  onPressed: () =>
+                                      Navigator.pop(innerContext, e),
                                 ),
                               )
                               .toList(),
@@ -340,20 +366,20 @@ class ProfileScreen extends StatelessWidget {
                     Align(
                       alignment: Alignment.centerRight,
                       child: ElevatedButton(
-                        onPressed: () => Navigator.pop(context),
+                        onPressed: () => Navigator.pop(dialogContext),
                         child: Text(
                           'Salva',
-                          style: Theme.of(context).textTheme.bodyMedium,
+                          style: Theme.of(builderContext).textTheme.bodyMedium,
                         ),
                       ),
                     ),
                     Center(
                       child: TextButton(
-                        onPressed: () => Navigator.pop(context),
+                        onPressed: () => Navigator.pop(dialogContext),
                         child: Text(
                           'Annulla',
                           style: Theme.of(
-                            context,
+                            builderContext,
                           ).textTheme.labelMedium?.copyWith(color: Colors.grey),
                         ),
                       ),
@@ -417,14 +443,14 @@ class ProfileScreen extends StatelessWidget {
   void _showLibraryOptionsDialog(BuildContext context) {
     showDialog(
       context: context,
-      builder: (BuildContext context) {
+      builder: (BuildContext dialogContext) {
         return AlertDialog(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
           ),
           title: Text(
             'Gestisci Libreria',
-            style: Theme.of(context).textTheme.titleMedium,
+            style: Theme.of(dialogContext).textTheme.titleMedium,
           ),
           content: Column(
             mainAxisSize: MainAxisSize.min,
@@ -434,8 +460,8 @@ class ProfileScreen extends StatelessWidget {
                 title: const Text('Importa Libreria'),
                 subtitle: const Text('Carica i tuoi libri da file'),
                 onTap: () async {
-                  Navigator.pop(context);
-                  await _importLibrary(context);
+                  Navigator.pop(dialogContext);
+                  await _importLibrary();
                 },
               ),
               const Divider(),
@@ -444,8 +470,8 @@ class ProfileScreen extends StatelessWidget {
                 title: const Text('Esporta Libreria'),
                 subtitle: const Text('Salva la tua collezione'),
                 onTap: () async {
-                  Navigator.pop(context);
-                  await _exportLibrary(context);
+                  Navigator.pop(dialogContext);
+                  await _exportLibrary();
                 },
               ),
             ],
@@ -454,11 +480,11 @@ class ProfileScreen extends StatelessWidget {
           actions: [
             Center(
               child: TextButton(
-                onPressed: () => Navigator.pop(context),
+                onPressed: () => Navigator.pop(dialogContext),
                 child: Text(
                   'Chiudi',
                   style: Theme.of(
-                    context,
+                    dialogContext,
                   ).textTheme.labelMedium?.copyWith(color: Colors.grey),
                 ),
               ),
@@ -469,15 +495,18 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 
-  Future<void> _importLibrary(BuildContext context) async {
-    Provider.of<BooksProvider>(context, listen: false);
+  Future<void> _importLibrary() async {
     final result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
       allowedExtensions: ['json'],
     );
+    if (!mounted) return;
+
     if (result != null && result.files.single.path != null) {
       final file = File(result.files.single.path!);
       final content = await file.readAsString();
+      if (!mounted) return;
+
       try {
         jsonDecode(content);
         // Qui puoi adattare per importare solo i libri, o tutta la struttura
@@ -492,17 +521,17 @@ class ProfileScreen extends StatelessWidget {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(
-              e.toString(),
+              'Errore nell\'importazione: ${e.toString()}',
               style: Theme.of(context).textTheme.bodyMedium,
             ),
-            duration: Duration(seconds: 2),
+            duration: const Duration(seconds: 2),
           ),
         );
       }
     }
   }
 
-  Future<void> _exportLibrary(BuildContext context) async {
+  Future<void> _exportLibrary() async {
     final booksProvider = Provider.of<BooksProvider>(context, listen: false);
     final books = booksProvider.books;
     final jsonBooks = books.map((b) => b.toJson()).toList();
@@ -510,13 +539,15 @@ class ProfileScreen extends StatelessWidget {
     final directory = await getApplicationDocumentsDirectory();
     final file = File('${directory.path}/libreria_export.json');
     await file.writeAsString(jsonString);
+    if (!mounted) return;
+
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(
           'Libreria esportata in ${file.path}',
           style: Theme.of(context).textTheme.bodyMedium,
         ),
-        duration: Duration(seconds: 2),
+        duration: const Duration(seconds: 2),
       ),
     );
   }

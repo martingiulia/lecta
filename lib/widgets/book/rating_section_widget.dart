@@ -39,7 +39,7 @@ class RatingSectionWidget extends StatelessWidget {
                     borderRadius: BorderRadius.circular(12),
                     border: Border.all(
                       color: Theme.of(context).brightness == Brightness.light
-                          ? Colors.grey.shade300
+                          ? Colors.grey.withValues(alpha: 0.3)
                           : AppTheme.lightSurface,
                       width: 1,
                     ),
@@ -74,7 +74,9 @@ class RatingSectionWidget extends StatelessWidget {
                                           ?.copyWith(
                                             color: index < customRating
                                                 ? Colors.amber
-                                                : Colors.grey.withOpacity(0.3),
+                                                : Colors.grey.withValues(
+                                                    alpha: 0.3,
+                                                  ),
                                           ),
                                     ),
                                   );
@@ -98,7 +100,9 @@ class RatingSectionWidget extends StatelessWidget {
                               child: Container(
                                 padding: const EdgeInsets.all(8),
                                 decoration: BoxDecoration(
-                                  color: AppTheme.primary.withOpacity(0.1),
+                                  color: AppTheme.primary.withValues(
+                                    alpha: 0.1,
+                                  ),
                                   borderRadius: BorderRadius.circular(12),
                                   border: Border.all(
                                     color: AppTheme.primary,

@@ -12,10 +12,10 @@ class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
 
   @override
-  _SearchPageState createState() => _SearchPageState();
+  SearchPageState createState() => SearchPageState();
 }
 
-class _SearchPageState extends State<SearchPage> {
+class SearchPageState extends State<SearchPage> {
   final TextEditingController _searchController = TextEditingController();
 
   @override
@@ -95,14 +95,15 @@ class _SearchPageState extends State<SearchPage> {
               icon: AppIcon(AppIconType.camera, size: 28),
               tooltip: 'Scannerizza ISBN',
               onPressed: () async {
+                final booksProvider = Provider.of<BooksProvider>(
+                  context,
+                  listen: false,
+                );
                 var result = await BarcodeScanner.scan();
                 if (result.rawContent.isNotEmpty) {
                   final isbnQuery = 'isbn:${result.rawContent}';
                   _searchController.text = isbnQuery;
-                  Provider.of<BooksProvider>(
-                    context,
-                    listen: false,
-                  ).searchBooks(isbnQuery);
+                  booksProvider.searchBooks(isbnQuery);
                 }
               },
             ),

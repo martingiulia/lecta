@@ -85,7 +85,7 @@ class DetailsSectionWidget extends StatelessWidget {
       decoration: BoxDecoration(
         color: Theme.of(context).brightness == Brightness.light
             ? Colors.grey.shade200
-            : AppTheme.lightSurface.withOpacity(0.1),
+            : AppTheme.lightSurface.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(12),
       ),
       child: Text(
@@ -136,7 +136,7 @@ class DetailsSectionWidget extends StatelessWidget {
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                     color: Theme.of(context).brightness == Brightness.light
                         ? Colors.grey.shade600
-                        : AppTheme.lightSurface.withOpacity(0.8),
+                        : AppTheme.lightSurface.withValues(alpha: 0.8),
                   ),
                 ),
               ),

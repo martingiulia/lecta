@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 
 import '../../screens/home_screen.dart';
 import '../../screens/shelf_screen.dart';
@@ -80,7 +79,7 @@ class CustomBottomNavigation extends StatelessWidget {
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
+            color: Colors.black.withValues(alpha: 0.1),
             blurRadius: 10,
             offset: const Offset(0, -2),
           ),
@@ -100,7 +99,7 @@ class CustomBottomNavigation extends StatelessWidget {
           selectedItemColor: AppTheme.primary,
           unselectedItemColor: Theme.of(context).brightness == Brightness.light
               ? Colors.grey[600]
-              : AppTheme.lightSurface.withOpacity(0.6),
+              : AppTheme.lightSurface.withValues(alpha: 0.6),
           selectedLabelStyle: const TextStyle(
             fontSize: 12,
             fontWeight: FontWeight.w600,
@@ -131,9 +130,11 @@ class CustomBottomNavigation extends StatelessWidget {
               label: 'Cerca',
             ),
             BottomNavigationBarItem(
-              icon: Platform.isAndroid
-                  ? ImageIcon(AssetImage('assets/images/3p_24.png'))
-                  : Icon(CupertinoIcons.chat_bubble_2),
+              icon: Icon(
+                Platform.isAndroid
+                    ? Icons.three_p
+                    : CupertinoIcons.chat_bubble_2,
+              ),
               label: 'Book Club',
             ),
             BottomNavigationBarItem(

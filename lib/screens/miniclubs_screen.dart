@@ -502,7 +502,10 @@ class ClubCard extends StatelessWidget {
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     colors: hasBackground
-                        ? [Colors.transparent, Colors.black.withOpacity(0.6)]
+                        ? [
+                            Colors.transparent,
+                            Colors.black.withValues(alpha: 0.6),
+                          ]
                         : [Colors.transparent, Colors.transparent],
                     begin: Alignment.bottomCenter,
                     end: Alignment.topCenter,
@@ -541,7 +544,7 @@ class ClubCard extends StatelessWidget {
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 color: hasBackground
-                                    ? Colors.white.withOpacity(0.2)
+                                    ? Colors.white.withValues(alpha: 0.2)
                                     : Colors.grey[300],
                               ),
                               child: Icon(
@@ -630,7 +633,7 @@ class Club {
   Map<String, dynamic> toJson() => {
     'name': name,
     'memberCount': memberCount,
-    'chatColor': chatColor?.value,
+    'chatColor': chatColor?.toARGB32(),
     'backgroundImage': backgroundImage,
     'invitedFriends': invitedFriends,
   };

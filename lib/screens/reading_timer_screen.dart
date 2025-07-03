@@ -221,7 +221,7 @@ class _ReadingTimerPageState extends State<ReadingTimerPage> {
                     border: Border.all(
                       color: Theme.of(context).brightness == Brightness.light
                           ? AppTheme.lightSurface
-                          : AppTheme.lightSurface.withOpacity(0.2),
+                          : AppTheme.lightSurface.withValues(alpha: 0.2),
                       width: 1,
                     ),
                   ),
@@ -255,7 +255,7 @@ class _ReadingTimerPageState extends State<ReadingTimerPage> {
                           color:
                               Theme.of(context).brightness == Brightness.light
                               ? Colors.grey[200]
-                              : AppTheme.lightSurface.withOpacity(0.1),
+                              : AppTheme.lightSurface.withValues(alpha: 0.1),
                           borderRadius: BorderRadius.circular(6),
                         ),
                         child: FractionallySizedBox(
@@ -270,8 +270,8 @@ class _ReadingTimerPageState extends State<ReadingTimerPage> {
                                   : (Theme.of(context).brightness ==
                                             Brightness.light
                                         ? Colors.grey[400]
-                                        : AppTheme.lightSurface.withOpacity(
-                                            0.6,
+                                        : AppTheme.lightSurface.withValues(
+                                            alpha: 0.6,
                                           )),
                               borderRadius: BorderRadius.circular(6),
                             ),
@@ -297,7 +297,7 @@ class _ReadingTimerPageState extends State<ReadingTimerPage> {
                   border: Border.all(
                     color: Theme.of(context).brightness == Brightness.light
                         ? AppTheme.lightSurface
-                        : AppTheme.lightSurface.withOpacity(0.2),
+                        : AppTheme.lightSurface.withValues(alpha: 0.2),
                     width: 1,
                   ),
                 ),
@@ -313,7 +313,7 @@ class _ReadingTimerPageState extends State<ReadingTimerPage> {
                       children: [
                         Container(
                           decoration: BoxDecoration(
-                            color: AppTheme.primary.withOpacity(0.08),
+                            color: AppTheme.primary.withValues(alpha: 0.08),
                             borderRadius: BorderRadius.circular(12),
                           ),
                           child: IconButton(
@@ -322,7 +322,7 @@ class _ReadingTimerPageState extends State<ReadingTimerPage> {
                                 ? null
                                 : () => _changeMinutes(-1),
                             color: isRunning
-                                ? AppTheme.primary.withOpacity(0.3)
+                                ? AppTheme.primary.withValues(alpha: 0.3)
                                 : AppTheme.primary,
                           ),
                         ),
@@ -334,7 +334,7 @@ class _ReadingTimerPageState extends State<ReadingTimerPage> {
                         const SizedBox(width: 24),
                         Container(
                           decoration: BoxDecoration(
-                            color: AppTheme.primary.withOpacity(0.08),
+                            color: AppTheme.primary.withValues(alpha: 0.08),
                             borderRadius: BorderRadius.circular(12),
                           ),
                           child: IconButton(
@@ -343,7 +343,7 @@ class _ReadingTimerPageState extends State<ReadingTimerPage> {
                                 ? null
                                 : () => _changeMinutes(1),
                             color: isRunning
-                                ? AppTheme.primary.withOpacity(0.3)
+                                ? AppTheme.primary.withValues(alpha: 0.3)
                                 : AppTheme.primary,
                           ),
                         ),
@@ -364,7 +364,7 @@ class _ReadingTimerPageState extends State<ReadingTimerPage> {
                   shape: BoxShape.circle,
                   boxShadow: [
                     BoxShadow(
-                      color: AppTheme.primary.withOpacity(0.15),
+                      color: AppTheme.primary.withValues(alpha: 0.15),
                       blurRadius: 12,
                       offset: const Offset(0, 4),
                     ),

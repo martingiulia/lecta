@@ -112,7 +112,7 @@ class _DiscoverContentState extends State<_DiscoverContent> {
       final booksProvider = Provider.of<BooksProvider>(context, listen: false);
 
       // Carica libri per ogni sezione
-      await booksProvider.searchBooks('bestseller fiction');
+      await booksProvider.searchBooks('bestselling books in italy');
       if (!mounted) return; // Controlla dopo ogni operazione asincrona
       featuredBooks = booksProvider.books.take(12).toList();
 

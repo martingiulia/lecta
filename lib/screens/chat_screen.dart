@@ -10,11 +10,11 @@ class BookClubChatPage extends StatefulWidget {
   final Color chatColor;
 
   const BookClubChatPage({
-    Key? key,
+    super.key,
     required this.clubName,
     required this.chatColor,
     this.backgroundImage,
-  }) : super(key: key);
+  });
 
   @override
   State<BookClubChatPage> createState() => _BookClubChatPageState();
@@ -119,7 +119,7 @@ class _BookClubChatPageState extends State<BookClubChatPage> {
             ),
           if (widget.backgroundImage != null)
             Positioned.fill(
-              child: Container(color: Colors.black.withOpacity(0.3)),
+              child: Container(color: Colors.black.withValues(alpha: 0.3)),
             ),
           Column(
             children: [
@@ -154,7 +154,7 @@ class _BookClubChatPageState extends State<BookClubChatPage> {
                 width: 40,
                 height: 40,
                 decoration: BoxDecoration(
-                  color: widget.chatColor.withOpacity(0.2),
+                  color: widget.chatColor.withValues(alpha: 0.2),
                   shape: BoxShape.circle,
                 ),
                 child: const Icon(Icons.add, color: Colors.white),
@@ -243,7 +243,7 @@ class _BookClubChatPageState extends State<BookClubChatPage> {
                     borderRadius: BorderRadius.circular(12),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withOpacity(0.07),
+                        color: Colors.black.withValues(alpha: 0.07),
                         blurRadius: 2,
                         offset: const Offset(0, 1),
                       ),
@@ -272,7 +272,7 @@ class _BookClubChatPageState extends State<BookClubChatPage> {
             const SizedBox(width: 8),
             CircleAvatar(
               radius: 18,
-              backgroundColor: widget.chatColor.withOpacity(0.5),
+              backgroundColor: widget.chatColor.withValues(alpha: 0.5),
               child: Text(
                 message.avatar,
                 style: Theme.of(

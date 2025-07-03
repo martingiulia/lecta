@@ -12,10 +12,10 @@ class ShelfPage extends StatefulWidget {
   const ShelfPage({super.key});
 
   @override
-  _ShelfPageState createState() => _ShelfPageState();
+  ShelfPageState createState() => ShelfPageState();
 }
 
-class _ShelfPageState extends State<ShelfPage> {
+class ShelfPageState extends State<ShelfPage> {
   String selectedGenre = 'Tutti';
   String searchQuery = '';
 

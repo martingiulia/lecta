@@ -22,7 +22,7 @@ class ToReadSection extends StatefulWidget {
   });
 
   @override
-  _ToReadSectionState createState() => _ToReadSectionState();
+  State<ToReadSection> createState() => _ToReadSectionState();
 }
 
 class _ToReadSectionState extends State<ToReadSection> {

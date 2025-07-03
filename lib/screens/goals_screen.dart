@@ -44,7 +44,7 @@ class _ReadingGoalsPageState extends State<ReadingGoalsPage> {
   ) {
     showDialog(
       context: context,
-      barrierColor: Colors.black.withOpacity(0.4),
+      barrierColor: Colors.black.withValues(alpha: 0.4),
       builder: (context) {
         int tempValue = currentValue;
         final theme = Theme.of(context);
@@ -78,14 +78,18 @@ class _ReadingGoalsPageState extends State<ReadingGoalsPage> {
                           data: SliderTheme.of(context).copyWith(
                             trackHeight: 8.0,
                             activeTrackColor: AppTheme.primary,
-                            inactiveTrackColor: AppTheme.primary.withAlpha(40),
+                            inactiveTrackColor: AppTheme.primary.withValues(
+                              alpha: 40,
+                            ),
                             thumbColor: AppTheme.primary,
                             thumbShape: const RoundSliderThumbShape(
                               enabledThumbRadius: 12.0,
                               elevation: 4.0,
                               pressedElevation: 8.0,
                             ),
-                            overlayColor: AppTheme.primary.withAlpha(20),
+                            overlayColor: AppTheme.primary.withValues(
+                              alpha: 20,
+                            ),
                             overlayShape: const RoundSliderOverlayShape(
                               overlayRadius: 20.0,
                             ),
@@ -268,7 +272,7 @@ class GoalCard extends StatelessWidget {
                   width: 40,
                   height: 40,
                   decoration: BoxDecoration(
-                    color: AppTheme.primary.withOpacity(0.1),
+                    color: AppTheme.primary.withValues(alpha: 0.1),
                     shape: BoxShape.circle,
                   ),
                   child: AppIcon(icon, color: AppTheme.primary, size: 20),
