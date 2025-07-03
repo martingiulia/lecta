@@ -1,0 +1,45 @@
+# Includi solo le directory e file specificati
+# Directory da includere: ios/, android/, assets/, lib/
+# File da includere: analysis_options.yaml, pubspec.lock, pubspec.yaml
+
+# Escludi tutto di default
+*
+
+# Includi le directory specifiche
+!ios/
+!ios/**
+!android/
+!android/**
+!assets/
+!assets/**
+!lib/
+!lib/**
+
+# Includi i file specifici
+!analysis_options.yaml
+!pubspec.lock
+!pubspec.yaml
+!.gitignore
+
+# Escludi comunque i file di build e cache all'interno delle directory incluse
+android/app/debug/
+android/app/profile/
+android/app/release/
+ios/Flutter/.last_build_id
+**/*.class
+**/*.log
+**/*.pyc
+**/*.swp
+**/.DS_Store
+**/*.iml
+**/*.ipr
+**/*.iws
+.idea/
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.pub-cache/
+.pub/
+build/
+app.*.symbols
+app.*.map.json
