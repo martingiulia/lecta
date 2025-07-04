@@ -43,6 +43,7 @@ flutter:
     - assets/videos/sfondogradient_dark.mp4
     - assets/videos/sfondogradient_light.mp4
     - assets/images/logo.png
+    - assets/images/logo-small.png
     - assets/images/bookclub.png
     - assets/images/empty-shelf.png
     - assets/images/tavola-obb-dark.png
@@ -80,10 +81,19 @@ flutter:
 flutter_native_splash:
   color: "#FFFFFF"
   image: assets/images/logo.png
-
+  
+  # Per Android normale
+  android_gravity: center
+  
+  # Per Android 12+
   android_12:
     color: "#FFFFFF"
     image: assets/images/logo.png
+    icon_background_color: "#FFFFFF"
+  
+  # Per iOS
+  ios_content_mode: center
+  
   android: true
   ios: true
   web: false
