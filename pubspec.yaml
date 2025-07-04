@@ -38,16 +38,18 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/images/sfondo_gradient.jpeg
-    - assets/images/sfondo_dark.png
-    - assets/images/sfondo-obbi.jpg
-    - assets/images/sfondo-sfide.jpg
+    - assets/images/sfondo-light.png
+    - assets/images/sfondo-dark.png
     - assets/videos/sfondogradient_dark.mp4
     - assets/videos/sfondogradient_light.mp4
     - assets/images/logo.png
-    - assets/images/miniclub.png
-    - assets/animations/X3Apy4ZpCp.json
-
+    - assets/images/bookclub.png
+    - assets/images/empty-shelf.png
+    - assets/images/tavola-obb-dark.png
+    - assets/images/tavola-obb-light.png
+    - assets/images/tavola-sfide-dark.png
+    - assets/images/tavola-sfide-light.png
+  
   fonts:
     - family: Roobert
       fonts:

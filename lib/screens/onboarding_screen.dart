@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:video_player/video_player.dart';
 import '../providers/onboarding_provider.dart';
+import '../core/theme.dart';
 
 /// Schermata di onboarding per i nuovi utenti con video background
 class OnboardingScreen extends StatefulWidget {
@@ -86,8 +87,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     } else {
       // Fallback all'immagine statica
       String backgroundImage = Theme.of(context).brightness == Brightness.dark
-          ? 'assets/images/sfondo_dark.png'
-          : 'assets/images/sfondo_gradient.jpeg';
+          ? 'assets/images/sfondo-dark.png'
+          : 'assets/images/sfondo-light.png';
 
       return Positioned.fill(
         child: Image.asset(backgroundImage, fit: BoxFit.cover),
@@ -135,9 +136,17 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           onPressed: () {
                             onboardingProvider.completeOnboarding();
                           },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: AppTheme.primary,
+                            foregroundColor: Colors.white,
+                          ),
                           child: Text(
-                            'Inizia',
-                            style: Theme.of(context).textTheme.bodyMedium,
+                            'Scopri Lecta',
+                            style: Theme.of(context).textTheme.bodyMedium
+                                ?.copyWith(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                ),
                           ),
                         ),
                       );

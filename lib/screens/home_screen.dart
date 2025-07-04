@@ -112,10 +112,7 @@ class _HomeScreenState extends State<HomeScreen> {
               color: Theme.of(context).brightness == Brightness.light
                   ? Colors.white
                   : null,
-              border: Border.all(
-                color: Colors.white,
-                width: Theme.of(context).brightness == Brightness.dark ? 1 : 0,
-              ),
+              border: Border.all(color: Colors.white, width: 2),
               boxShadow: [
                 BoxShadow(
                   color: Colors.black.withAlpha(5),
@@ -237,12 +234,7 @@ class _HomeScreenState extends State<HomeScreen> {
               decoration: BoxDecoration(
                 color: Theme.of(context).cardColor,
                 borderRadius: BorderRadius.circular(12),
-                border: Border.all(
-                  color: Theme.of(context).brightness == Brightness.dark
-                      ? AppTheme.primary
-                      : Colors.transparent,
-                  width: 2,
-                ),
+                border: Border.all(color: Colors.white, width: 2),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black.withAlpha(25),
@@ -298,30 +290,46 @@ class _HomeScreenState extends State<HomeScreen> {
     return Row(
       children: [
         Expanded(
-          child: AspectRatio(
-            aspectRatio: 1,
-            child: GestureDetector(
-              onTap: () => _showObjectivesDialog(context),
+          child: GestureDetector(
+            onTap: () => _showObjectivesDialog(context),
+            child: AspectRatio(
+              aspectRatio: 1,
               child: Container(
                 decoration: BoxDecoration(
-                  color: Theme.of(context).brightness == Brightness.dark
-                      ? const Color(0xFF404040)
-                      : const Color(0xFFD0D0D0),
                   borderRadius: BorderRadius.circular(12),
-                  image: const DecorationImage(
-                    image: AssetImage('assets/images/sfondo-obbi.jpg'),
-                    fit: BoxFit.cover,
-                  ),
+                  border: Border.all(color: Colors.white, width: 2),
                 ),
-                padding: const EdgeInsets.all(11),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'I miei obiettivi',
-                      style: Theme.of(context).textTheme.bodyMedium,
-                    ),
-                  ],
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Stack(
+                    children: [
+                      Image.asset(
+                        Theme.of(context).brightness == Brightness.dark
+                            ? 'assets/images/tavola-obb-dark.png'
+                            : 'assets/images/tavola-obb-light.png',
+                        fit: BoxFit.cover,
+                        width: double.infinity,
+                        height: double.infinity,
+                      ),
+                      Positioned(
+                        top: 12,
+                        left: 12,
+                        child: Text(
+                          'I miei obiettivi',
+                          style: Theme.of(context).textTheme.bodyMedium
+                              ?.copyWith(
+                                color:
+                                    Theme.of(context).brightness ==
+                                        Brightness.dark
+                                    ? Colors.white
+                                    : Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                              ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -329,30 +337,46 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         const SizedBox(width: 25),
         Expanded(
-          child: AspectRatio(
-            aspectRatio: 1,
-            child: GestureDetector(
-              onTap: () => _showChallengesDialog(context),
+          child: GestureDetector(
+            onTap: () => _showChallengesDialog(context),
+            child: AspectRatio(
+              aspectRatio: 1,
               child: Container(
                 decoration: BoxDecoration(
-                  color: Theme.of(context).brightness == Brightness.dark
-                      ? const Color(0xFF404040)
-                      : const Color(0xFFD0D0D0),
                   borderRadius: BorderRadius.circular(12),
-                  image: const DecorationImage(
-                    image: AssetImage('assets/images/sfondo-sfide.jpg'),
-                    fit: BoxFit.cover,
-                  ),
+                  border: Border.all(color: Colors.white, width: 2),
                 ),
-                padding: const EdgeInsets.all(11),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Le sfide del mese',
-                      style: Theme.of(context).textTheme.bodyMedium,
-                    ),
-                  ],
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Stack(
+                    children: [
+                      Image.asset(
+                        Theme.of(context).brightness == Brightness.dark
+                            ? 'assets/images/tavola-sfide-dark.png'
+                            : 'assets/images/tavola-sfide-light.png',
+                        fit: BoxFit.cover,
+                        width: double.infinity,
+                        height: double.infinity,
+                      ),
+                      Positioned(
+                        top: 12,
+                        left: 12,
+                        child: Text(
+                          'Le sfide del mese',
+                          style: Theme.of(context).textTheme.bodyMedium
+                              ?.copyWith(
+                                color:
+                                    Theme.of(context).brightness ==
+                                        Brightness.dark
+                                    ? Colors.white
+                                    : Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                              ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

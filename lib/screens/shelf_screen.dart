@@ -82,6 +82,41 @@ class ShelfPageState extends State<ShelfPage> {
               return matchesGenre && matchesQuery;
             }).toList();
 
+            final bool isShelfEmpty =
+                booksProvider.currentlyReading.isEmpty &&
+                booksProvider.toRead.isEmpty &&
+                booksProvider.finished.isEmpty;
+
+            if (isShelfEmpty) {
+              return Expanded(
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        'assets/images/empty-shelf.png',
+                        width: 300,
+                        height: 250,
+                        fit: BoxFit.contain,
+                      ),
+                      const SizedBox(height: 24),
+                      Text(
+                        'Nessun libro in libreria',
+                        style: Theme.of(context).textTheme.headlineMedium,
+                        textAlign: TextAlign.center,
+                      ),
+                      const SizedBox(height: 6),
+                      Text(
+                        'Vai in discover e salva i tuoi libri preferiti',
+                        style: Theme.of(context).textTheme.bodyMedium,
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            }
+
             return Column(
               children: [
                 Padding(

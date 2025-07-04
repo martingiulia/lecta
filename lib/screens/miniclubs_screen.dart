@@ -82,15 +82,15 @@ class _BookClubPageState extends State<BookClubPage> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image.asset('assets/images/miniclub.png', width: 300, height: 250),
+          Image.asset('assets/images/bookclub.png', width: 300, height: 250),
 
           Text(
             'Nessun book club ancora',
-            style: Theme.of(context).textTheme.bodyLarge,
+            style: Theme.of(context).textTheme.headlineMedium,
           ),
           SizedBox(height: 8),
           Text(
-            'Crea il tuo primo book club per\niniziare a chattare con i tuoi amici',
+            'Crea il tuo primo bookclub per\niniziare a chattare con i tuoi amici',
             textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.bodyMedium,
           ),
