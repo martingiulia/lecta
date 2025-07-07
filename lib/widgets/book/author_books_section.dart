@@ -63,7 +63,7 @@ class _AuthorBooksSectionState extends State<AuthorBooksSection> {
     return Container(
       padding: const EdgeInsetsDirectional.fromSTEB(25, 25, 25, 50),
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.surface,
+        color: Colors.white,
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
           color: Theme.of(context).brightness == Brightness.light
@@ -102,7 +102,7 @@ class _AuthorBooksSectionState extends State<AuthorBooksSection> {
             Container(
               padding: const EdgeInsets.all(25),
               decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.errorContainer,
+                color: Colors.white,
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Row(
@@ -191,52 +191,18 @@ class _AuthorBooksSectionState extends State<AuthorBooksSection> {
                           width: double.infinity,
                           errorBuilder: (context, error, stackTrace) {
                             return Container(
-                              color: Theme.of(
-                                context,
-                              ).colorScheme.surfaceContainerHighest,
+                              color: Colors.white,
                               child: AppIcon(AppIconType.book),
                             );
                           },
                         )
                       : Container(
-                          color: Theme.of(
-                            context,
-                          ).colorScheme.surfaceContainerHighest,
+                          color: Colors.white,
                           child: AppIcon(AppIconType.book),
                         ),
                 ),
               ),
             ),
-            const SizedBox(height: 8),
-
-            // Titolo
-            Text(
-              book.title,
-              style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                fontWeight: FontWeight.w500,
-                color: AppTheme.lightSurface,
-              ),
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-            ),
-
-            // Rating
-            if (book.rating > 0) ...[
-              const SizedBox(height: 4),
-              Row(
-                children: [
-                  AppIcon(AppIconType.star),
-                  const SizedBox(width: 2),
-                  Text(
-                    book.rating.toStringAsFixed(1),
-                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: Theme.of(context).colorScheme.onSurfaceVariant,
-                      fontSize: 10,
-                    ),
-                  ),
-                ],
-              ),
-            ],
           ],
         ),
       ),

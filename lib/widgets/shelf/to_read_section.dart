@@ -47,9 +47,17 @@ class _ToReadSectionState extends State<ToReadSection> {
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 25),
-          child: Text(
-            'Da Leggere',
-            style: Theme.of(context).textTheme.bodyLarge,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text('Da Leggere', style: Theme.of(context).textTheme.bodyLarge),
+              Text(
+                'Swipe a destra',
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                  color: Colors.black.withValues(alpha: 0.4),
+                ),
+              ),
+            ],
           ),
         ),
         SizedBox(height: 25),
@@ -160,7 +168,7 @@ class _ToReadSectionState extends State<ToReadSection> {
                                     ),
                                     SizedBox(height: 6),
                                     Text(
-                                      book.author,
+                                      book.lastName,
                                       style: Theme.of(
                                         context,
                                       ).textTheme.bodySmall,

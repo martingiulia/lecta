@@ -25,7 +25,7 @@ class BookCoverWidget extends StatelessWidget {
         child: Container(
           width: width,
           height: height ?? 330,
-          color: Theme.of(context).cardColor,
+          color: Colors.white,
           child: book.coverUrl.isNotEmpty
               ? Image.network(
                   '${book.coverUrl}?w=500&h=750&quality=90',
@@ -33,7 +33,7 @@ class BookCoverWidget extends StatelessWidget {
                   loadingBuilder: (context, child, loadingProgress) {
                     if (loadingProgress == null) return child;
                     return Container(
-                      color: Theme.of(context).cardColor,
+                      color: Colors.white,
                       child: Center(
                         child: CircularProgressIndicator(
                           value: loadingProgress.expectedTotalBytes != null
@@ -57,7 +57,7 @@ class BookCoverWidget extends StatelessWidget {
   Widget _buildPlaceholderCover(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Theme.of(context).cardColor,
+        color: Colors.white,
         border: Border.all(color: AppTheme.primary, width: 2),
         borderRadius: BorderRadius.circular(12),
       ),

@@ -105,7 +105,7 @@ class _HomeScreenState extends State<HomeScreen> {
         clipBehavior: Clip.none,
         children: [
           Container(
-            margin: const EdgeInsets.only(top: 240),
+            margin: const EdgeInsets.only(top: 220),
             padding: const EdgeInsets.fromLTRB(25, 60, 25, 20),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12),
@@ -129,11 +129,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
                             book.title,
-                            style: Theme.of(context).textTheme.bodyLarge
-                                ?.copyWith(fontWeight: FontWeight.bold),
+                            style: Theme.of(context).textTheme.titleLarge,
+                            textAlign: TextAlign.center,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
                           ),
                           const SizedBox(height: 6),
                           Text(
@@ -141,6 +144,9 @@ class _HomeScreenState extends State<HomeScreen> {
                             style: Theme.of(
                               context,
                             ).textTheme.bodySmall?.copyWith(color: Colors.grey),
+                            textAlign: TextAlign.center,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
                           ),
                         ],
                       ),
@@ -184,24 +190,43 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Stack(
               alignment: Alignment.bottomCenter,
               children: [
-                BookCoverWidget(book: book, width: 200, height: 280),
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withValues(alpha: 0.1),
+                        blurRadius: 8,
+                        offset: const Offset(0, 4),
+                      ),
+                    ],
+                  ),
+                  child: BookCoverWidget(book: book, width: 180, height: 270),
+                ),
                 Positioned(
                   bottom: 12.5,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(6),
-                    child: SizedBox(
-                      width: 180,
-                      height: 12.5,
-                      child: LinearProgressIndicator(
-                        value: progress,
-                        backgroundColor: const Color.fromARGB(
-                          95,
-                          255,
-                          255,
-                          255,
-                        ),
-                        valueColor: const AlwaysStoppedAnimation<Color>(
-                          Colors.white,
+                  child: Material(
+                    elevation: 1,
+                    borderRadius: BorderRadius.circular(12),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(color: AppTheme.primary, width: 2),
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(12),
+                        child: SizedBox(
+                          width: 150,
+                          height: 10,
+                          child: LinearProgressIndicator(
+                            value: progress,
+                            backgroundColor: AppTheme.primary.withValues(
+                              alpha: 0.1,
+                            ),
+                            valueColor: const AlwaysStoppedAnimation<Color>(
+                              AppTheme.primary,
+                            ),
+                          ),
                         ),
                       ),
                     ),
@@ -273,7 +298,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               const SizedBox(height: 12.5),
               Text(
-                'I tuoi ultimi libri in corso e completati con attività di lettura appariranno qui.',
+                'I tuoi ultimi libri in corso con attività di lettura appariranno qui.',
                 style: Theme.of(context).textTheme.bodyMedium,
                 textAlign: TextAlign.center,
               ),

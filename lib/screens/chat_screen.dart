@@ -144,10 +144,10 @@ class _BookClubChatPageState extends State<BookClubChatPage> {
 
       // 🔽 barra dei messaggi SEMPRE in fondo (anche con tastiera aperta)
       bottomNavigationBar: SafeArea(
-        minimum: const EdgeInsets.only(left: 8, right: 8, bottom: 8),
         child: Container(
           color: Colors.white,
-          padding: const EdgeInsets.symmetric(vertical: 8),
+          padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+          margin: const EdgeInsets.only(bottom: 8),
           child: Row(
             children: [
               Container(
@@ -164,11 +164,12 @@ class _BookClubChatPageState extends State<BookClubChatPage> {
                 child: Container(
                   padding: const EdgeInsets.symmetric(
                     horizontal: 16,
-                    vertical: 6,
+                    vertical: 14,
                   ),
                   decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(12),
+                    color: Colors.grey[100],
+                    borderRadius: BorderRadius.circular(25),
+                    border: Border.all(color: Colors.grey[300]!, width: 1),
                   ),
                   child: TextField(
                     controller: _messageController,
@@ -176,8 +177,10 @@ class _BookClubChatPageState extends State<BookClubChatPage> {
                       hintText: 'Scrivi un messaggio...',
                       border: InputBorder.none,
                       contentPadding: EdgeInsets.zero,
+                      isDense: true,
                     ),
                     maxLines: null,
+                    minLines: 1,
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
                 ),

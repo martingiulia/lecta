@@ -17,7 +17,8 @@ class AppNavigator extends StatelessWidget {
           return const SplashScreen(); // Mostra loading
         }
 
-        if (onboardingProvider.hasSeenOnboarding) {
+        if (onboardingProvider.hasSeenOnboarding ||
+            onboardingProvider.hasLoggedIn) {
           return const BottomNavigationWidget(); // Mostra l'app completa
         } else {
           return const OnboardingScreen(); // Mostra onboarding

@@ -3,6 +3,7 @@ import '/../../core/book_model.dart';
 import 'package:provider/provider.dart';
 import '../../providers/books_provider.dart';
 import '../../core/app_icon.dart';
+import '../../core/theme.dart';
 
 class RatingBottomSheet extends StatefulWidget {
   final Book book;
@@ -61,6 +62,12 @@ class _RatingBottomSheetState extends State<RatingBottomSheet> {
         left: 24,
         right: 24,
         top: 32,
+      ),
+      decoration: BoxDecoration(
+        color: Theme.of(context).brightness == Brightness.dark
+            ? AppTheme.darkBackground
+            : Colors.white,
+        borderRadius: BorderRadius.circular(12),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

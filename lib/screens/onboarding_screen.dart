@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:video_player/video_player.dart';
 import '../providers/onboarding_provider.dart';
 import '../core/theme.dart';
+import 'registration_screen.dart';
 
 /// Schermata di onboarding per i nuovi utenti con video background
 class OnboardingScreen extends StatefulWidget {
@@ -134,14 +135,20 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         width: double.infinity,
                         child: ElevatedButton(
                           onPressed: () {
-                            onboardingProvider.completeOnboarding();
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    const RegistrationScreen(),
+                              ),
+                            );
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: AppTheme.primary,
                             foregroundColor: Colors.white,
                           ),
                           child: Text(
-                            'Scopri Lecta',
+                            'Inizia il tuo Lecta',
                             style: Theme.of(context).textTheme.bodyMedium
                                 ?.copyWith(
                                   color: Colors.white,

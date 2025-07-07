@@ -18,7 +18,7 @@ class Book {
   final DateTime? publishDate;
   final DateTime? finishedDate;
 
-  Book({
+  const Book({
     required this.id,
     required this.title,
     required this.author,
@@ -36,6 +36,12 @@ class Book {
 
   // Getter per compatibilità con il codice esistente
   String? get genre => genres.isNotEmpty ? genres.first : null;
+
+  // Funzione helper per ottenere solo il cognome
+  String get lastName {
+    final nameParts = author.trim().split(' ');
+    return nameParts.isNotEmpty ? nameParts.last : author;
+  }
 
   factory Book.fromGoogleBooks(Map<String, dynamic> item) {
     final volumeInfo = item['volumeInfo'] ?? {};

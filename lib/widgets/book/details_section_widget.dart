@@ -17,7 +17,7 @@ class DetailsSectionWidget extends StatelessWidget {
         Container(
           padding: const EdgeInsets.all(25),
           decoration: BoxDecoration(
-            color: Theme.of(context).cardColor,
+            color: Colors.white,
             borderRadius: BorderRadius.circular(12),
             border: Border.all(
               color: Theme.of(context).brightness == Brightness.light

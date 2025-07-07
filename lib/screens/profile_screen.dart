@@ -45,18 +45,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
             CircleAvatar(
               radius: 50,
               backgroundColor: Theme.of(context).colorScheme.secondary,
-              child: const Icon(Icons.person, size: 50, color: Colors.white),
+              backgroundImage: AssetImage('assets/images/profilo-foto.jpg'),
             ),
             const SizedBox(height: 16),
             Text(
-              'Nome Utente',
+              'Giulia Martin',
               style: Theme.of(
                 context,
               ).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 8),
             Text(
-              'utente@email.com',
+              'Appassionata di libri dal 2015',
               style: Theme.of(
                 context,
               ).textTheme.bodyMedium?.copyWith(color: Colors.grey[600]),
@@ -363,13 +363,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Align(
-                      alignment: Alignment.centerRight,
+                    Center(
                       child: ElevatedButton(
                         onPressed: () => Navigator.pop(dialogContext),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: AppTheme.primary,
+                          foregroundColor: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
                         child: Text(
                           'Salva',
-                          style: Theme.of(builderContext).textTheme.bodyMedium,
+                          style: Theme.of(
+                            builderContext,
+                          ).textTheme.bodyMedium?.copyWith(color: Colors.white),
                         ),
                       ),
                     ),
