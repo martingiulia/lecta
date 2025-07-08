@@ -14,6 +14,8 @@
 !assets/**
 !lib/
 !lib/**
+!fonts/
+!fonts/**
 
 # Includi i file specifici
 !analysis_options.yaml
