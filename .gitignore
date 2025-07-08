@@ -1,5 +1,5 @@
 # Includi solo le directory e file specificati
-# Directory da includere: ios/, android/, assets/, lib/
+# Directory da includere: ios/, android/, assets/, lib/, fonts/
 # File da includere: analysis_options.yaml, pubspec.lock, pubspec.yaml
 
 # Escludi tutto di default
